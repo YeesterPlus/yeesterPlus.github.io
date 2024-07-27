@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="NewTab.css" />
+    <title>New Tab</title>
+    <script>
+        if (navigator.userAgent.search("Firefox") > -1) {
+            document.documentElement.style.background = "black"
+        }
+        document.onreadystatechange = () => document.readyState == "complete" ? (function () {
+            var tick
+            function loop() {
+                tick++
+                requestAnimationFrame(loop)
+            }
+            loop()
+            var t
+            document.getElementById("searchbox").addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+
+                    t = tick
+                }
+            });
+            document.getElementById("searchbox").addEventListener("keyup", (event) => {
+                if (event.key === "Enter" && t - tick < 4) {
+                    var uri
+                    var { protocol, page } = parse(document.getElementById('searchbox').value)
+                    if (protocol == "astof") {
+                        console.log(page || "null")
+                        console.log(window.location + "")
+                        uri = (window.location + "").split("/index.html").join("/Pages/") + page
+                    } else {
+                        uri = document.getElementById('searchbox').value
+                    }
+                    document.getElementById('content').loadURL(uri)
+                    document.getElementById('searchbox').blur()
+                }
+            });
+        })() : void 0
+    </script>
+    <script>
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = './NewTab.png';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <script>
+        function checkTimeLoop() {
+            var t = [0, 0, false]
+            var d = new Date(Date.now())
+            t[0] = d.getHours()
+            t[2] = t[0] >= 12
+            t[0] = (t[0] % 12)
+            t[0] = !t[0] ? 12 : t[0]
+            t[1] = d.getMinutes()
+            try {
+                document.getElementById('time').textContent = `${t[0]}:${(t[1] >= 10) ? t[1] : ("0" + t[1])} ${t[2] ? "PM" : "AM"}`
+            } catch (err) {
+                console.error(err)
+            }
+            requestAnimationFrame(checkTimeLoop)
+        }
+        checkTimeLoop()
+    </script>
+</head>
+
+<body>
+    <div class="big"></div>
+    <div class="time" id="time">??:?? ?</div>
+    <div class="searchbar"><input id="searchbox" type="text" /> <button
+            onclick="location.assign('https://duckduckgo.com/?kae=d&kbf=1&k5=1&kbc=1&kax=v436-1&k8=0200ff&kaa=8900ff&kx=7d03ce&k9=ff00e5&k7=000000&kj=010001&k21=020221&q='+encodeURIComponent(window.document.getElementById`searchbox`.value))"></button>
+    </div>
+</body>
+
+</html>
