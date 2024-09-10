@@ -10,7 +10,6 @@ html * {
     height: 18px;
     border-color: rgb(151, 0, 255);
     border-radius: 12px;
-    border-style: solid;
     background-color: transparent;
     color: white;
     overflow: hidden;
@@ -79,6 +78,9 @@ text {
     justify-content: center;
     margin: auto auto;
     height: 9em;
+}
+.searchbar * {
+    border-style: solid;
 }
 
 .big {
