@@ -23,18 +23,8 @@
                 }
             });
             document.getElementById("searchbox").addEventListener("keyup", (event) => {
-                if (event.key === "Enter" && t - tick < 4) {
-                    var uri
-                    var { protocol, page } = parse(document.getElementById('searchbox').value)
-                    if (protocol == "astof") {
-                        console.log(page || "null")
-                        console.log(window.location + "")
-                        uri = (window.location + "").split("/index.html").join("/Pages/") + page
-                    } else {
-                        uri = document.getElementById('searchbox').value
-                    }
-                    document.getElementById('content').loadURL(uri)
-                    document.getElementById('searchbox').blur()
+                if (event.key === "Enter") {
+                    location.assign('https://duckduckgo.com/?kae=d&kbf=1&k5=1&kbc=1&kax=v436-1&k8=0200ff&kaa=8900ff&kx=7d03ce&k9=ff00e5&k7=000000&kj=010001&k21=020221&q=' + encodeURIComponent(window.document.getElementById`searchbox`.value))
                 }
             });
         })() : void 0

@@ -10,6 +10,7 @@ html * {
     height: 18px;
     border-color: rgb(151, 0, 255);
     border-radius: 12px;
+    border-style: solid;
     background-color: transparent;
     color: white;
     overflow: hidden;
